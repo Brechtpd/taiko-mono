@@ -48,7 +48,7 @@ contract Bridge is EssentialContract, IBridge {
     event MessageSent(bytes32 indexed msgHash, Message message);
     event MessageReceived(bytes32 indexed msgHash, Message message, bool isRecall);
     event MessageRecalled(bytes32 indexed msgHash);
-    event MessageExecuted(bytes32 indexed msgHash);
+    event MessageProcessed(bytes32 indexed msgHash);
     event DestChainEnabled(uint64 indexed chainId, bool enabled);
     event MessageStatusChanged(bytes32 indexed msgHash, Status status);
 
@@ -262,7 +262,7 @@ contract Bridge is EssentialContract, IBridge {
                 msg.sender.sendEther(message.fee);
                 refundTo.sendEther(refundAmount);
             }
-            emit MessageExecuted(msgHash);
+            emit MessageProcessed(msgHash);
         } else if (isMessageNew) {
             emit MessageReceived(msgHash, message, false);
         } else {
