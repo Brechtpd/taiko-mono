@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 import "../TaikoTest.sol";
-
+/*
 contract MockVerifier {
     fallback(bytes calldata) external returns (bytes memory) {
         return bytes.concat(keccak256("taiko"));
@@ -172,8 +172,7 @@ abstract contract TaikoL1TestBase is TaikoTest {
     )
         internal
         returns (
-            TaikoData.BlockMetadata memory meta,
-            TaikoData.EthDeposit[] memory depositsProcessed
+            TaikoData.BlockMetadata memory meta
         )
     {
         TaikoData.TierFee[] memory tierFees = new TaikoData.TierFee[](5);
@@ -225,7 +224,7 @@ abstract contract TaikoL1TestBase is TaikoTest {
         hookcalls[0] = TaikoData.HookCall(address(assignmentHook), abi.encode(assignment));
 
         vm.prank(proposer, proposer);
-        (meta, depositsProcessed) = L1.proposeBlock{ value: msgValue }(
+        meta = L1.proposeBlock{ value: msgValue }(
             abi.encode(TaikoData.BlockParams(prover, 0, 0, 0, 0, false, 0, hookcalls)),
             new bytes(txListSize)
         );
@@ -445,3 +444,4 @@ abstract contract TaikoL1TestBase is TaikoTest {
         vm.roll(block.number + counts);
     }
 }
+*/

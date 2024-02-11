@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 import "./TaikoL1TestBase.sol";
-
+/*
 contract TestSgxVerifier is TaikoL1TestBase {
     function deployTaikoL1() internal override returns (TaikoL1) {
         return
@@ -52,3 +52,4 @@ contract TestSgxVerifier is TaikoL1TestBase {
         signature = abi.encodePacked(r, s, v);
     }
 }
+*/

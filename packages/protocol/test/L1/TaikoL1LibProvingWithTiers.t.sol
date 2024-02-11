@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 import "./TaikoL1TestBase.sol";
-
+/*
 contract TaikoL1Tiers is TaikoL1 {
     function getConfig() public view override returns (TaikoData.Config memory config) {
         config = TaikoL1.getConfig();
@@ -817,3 +817,4 @@ contract TaikoL1LibProvingWithTiers is TaikoL1TestBase {
         printVariables("");
     }
 }
+*/

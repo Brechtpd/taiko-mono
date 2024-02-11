@@ -7,17 +7,16 @@
 pragma solidity ^0.8.20;
 
 import "lib/openzeppelin-contracts/contracts/utils/Strings.sol";
-
+/*
 import "../contracts/L1/TaikoToken.sol";
 import "../contracts/L1/TaikoL1.sol";
-import "../contracts/L1/hooks/AssignmentHook.sol";
 import "../contracts/L1/provers/GuardianProver.sol";
 import "../contracts/L1/verifiers/PseZkVerifier.sol";
 import "../contracts/L1/verifiers/SgxVerifier.sol";
 import "../contracts/L1/verifiers/SgxAndZkVerifier.sol";
 import "../contracts/L1/verifiers/GuardianVerifier.sol";
 import "../contracts/L1/tiers/TaikoA6TierProvider.sol";
-import "../contracts/L1/hooks/AssignmentHook.sol";
+import "../contracts/L1/actors/StandardProverPayment.sol";
 import "../contracts/L1/gov/TaikoTimelockController.sol";
 import "../contracts/L1/gov/TaikoGovernor.sol";
 import "../contracts/bridge/Bridge.sol";
@@ -295,8 +294,8 @@ contract DeployOnL1 is DeployCapability {
 
         deployProxy({
             name: "assignment_hook",
-            impl: address(new AssignmentHook()),
-            data: bytes.concat(AssignmentHook.init.selector, abi.encode(rollupAddressManager)),
+            impl: address(new StandardProverPayment()),
+            data: bytes.concat(StandardProverPayment.init.selector, abi.encode(rollupAddressManager)),
             registerTo: address(0),
             owner: timelock
         });
@@ -398,3 +397,4 @@ contract DeployOnL1 is DeployCapability {
         require(addr != address(0), err);
     }
 }
+*/
