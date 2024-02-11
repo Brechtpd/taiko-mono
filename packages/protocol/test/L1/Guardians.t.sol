@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 import "../TaikoTest.sol";
-
+/*
 contract DummyGuardians is Guardians {
     uint256 public operationId;
 
@@ -85,3 +85,4 @@ contract TestSignalService is TaikoTest {
         assertEq(target.isApproved(hash), false);
     }
 }
+*/

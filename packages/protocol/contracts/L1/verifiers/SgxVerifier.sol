@@ -95,25 +95,23 @@ contract SgxVerifier is EssentialContract, IVerifier {
 
     /// @inheritdoc IVerifier
     function verifyProof(
-        Context calldata ctx,
-        TaikoData.Transition calldata tran,
-        TaikoData.TierProof calldata proof
+        TaikoData.BlockMetadata calldata _block,
+        TaikoData.Transition calldata transition,
+        address prover,
+        bytes calldata proof
     )
         external
     {
-        // Do not run proof verification to contest an existing proof
-        if (ctx.isContesting) return;
-
         // Size is: 89 bytes
         // 4 bytes + 20 bytes + 65 bytes (signature) = 89
-        if (proof.data.length != 89) revert SGX_INVALID_PROOF();
+        if (proof.length != 89) revert SGX_INVALID_PROOF();
 
-        uint32 id = uint32(bytes4(LibBytesUtils.slice(proof.data, 0, 4)));
-        address newInstance = address(bytes20(LibBytesUtils.slice(proof.data, 4, 20)));
-        bytes memory signature = LibBytesUtils.slice(proof.data, 24);
+        uint32 id = uint32(bytes4(LibBytesUtils.slice(proof, 0, 4)));
+        address newInstance = address(bytes20(LibBytesUtils.slice(proof, 4, 20)));
+        bytes memory signature = LibBytesUtils.slice(proof, 24);
 
         address oldInstance =
-            ECDSA.recover(getSignedHash(tran, newInstance, ctx.prover, ctx.metaHash), signature);
+            ECDSA.recover(getSignedHash(transition, newInstance, prover, keccak256(abi.encode(_block))), signature);
 
         if (!_isInstanceValid(id, oldInstance)) revert SGX_INVALID_INSTANCE();
         _replaceInstance(id, oldInstance, newInstance);
